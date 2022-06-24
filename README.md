@@ -1,4 +1,4 @@
-# keras2cpp_multithreading
+# keras2cpp_multithreading image segmentation
 convert and use your keras trained model in c/c++ project in the easist way. Multithreaded implementation for faster execution. Tested on visual studio vc++, but can be used with any other compiler.
 
 Step 1: Convert Your Keras Model into text files
