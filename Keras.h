@@ -2,6 +2,10 @@
 //main function to call
 int *ExecuteKerasSegmentation(int *img, int &h, int &w, int channels, char *modelfile, char*weightfile);
 
+
+bool save_image_pgm(const std::string &name, int* img, int h, int w, int scale=1);
+int *open_image_ppm(const std::string &name, int &w, int &h);
+
 //define layer types
 enum KerasLayerType {Keras_InputLayer, Keras_Conv2D, Keras_SeparableConv2D, Keras_Activation, Keras_BatchNormalization, Keras_Add, Keras_UpSampling2D, Keras_MaxPooling2D   };
 //it means #define Conv2D	0, #define SeparableConv2D		1, #define Activation			2 etc....

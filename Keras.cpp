@@ -186,14 +186,14 @@ void ExitMemoryChunk(memory_chunk &m)
 }
 
 
-bool save_image_pgm(const std::string &name, int* img, int h, int w, int scale=1)
+bool save_image_pgm(const std::string &name, int* img, int h, int w, int scale/*=1*/)
 {
 	if(!img)
 		return false;
 	std::ofstream outfile(name);
    if(!outfile.is_open())
    {
-	   AfxMessageBox(_T("Unable to open pgm image file to write"));
+	  // AfxMessageBox(_T("Unable to open pgm image file to write"));
 	   return false;
    }
   // std::string code="P3";
@@ -225,6 +225,39 @@ bool save_image_pgm(const std::string &name, int* img, int h, int w, int scale=1
    return true;
 }
 
+int *open_image_ppm(const std::string &name , int &w, int &h)
+{
+	
+   std::ifstream infile(name);
+   if(!infile.is_open())
+   {
+	  // AfxMessageBox(_T("Unable to open ppm image file to read"));
+	   return NULL;
+   }
+   std::string code, comment;
+  
+   infile>>code; //read P3
+   infile>>comment;
+   int maxlevel;
+   infile>>w>>h>>maxlevel;
+   unsigned int r,g,b;
+   
+   int *img = new int[h*w*3];
+   int *img_r = img, *img_g =&img[h*w], *img_b=&img[2*h*w];
+	   int k=0;
+	   for (int y = 0; y < h; y++) {
+		  for (int x = 0; x < w;x++) {
+			 infile>>r>>g>>b;
+			 *img_r++ =r; *img_g++ =g; *img_b++ = b;
+		  }
+		 
+	   }
+   
+  
+   
+   infile.close();
+   return img;
+}
 
 
 
